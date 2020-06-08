@@ -1,8 +1,10 @@
-<h1>Gerador de etiquetas Pimaco</h1>
-<label for="pimaco">Escolha o formato da folha:</label>
+<title>Gerador de etiquetas Pimaco</title>
+<button id='add_product' class="button is-success">Adicionar Novo Produto</button><br><br>
 <form method="post" action="/generate-print-tags">
 	@csrf
+	<label for="pimaco">Escolha o formato da folha:</label>
 	<select name="pimaco" id="pimaco">
+		<option value="A4260">A4260</option>
 		<option value="A4360">A4360</option>
 	 	<option value="3080">3080</option>
 		<option value="3081">3081</option>
@@ -77,7 +79,6 @@
 		<option value="A4254">A4254</option>
 		<option value="A4255">A4255</option>
 		<option value="A4256">A4256</option>
-		<option value="A4260">A4260</option>
 		<option value="A4261">A4261</option>
 		<option value="A4262">A4262</option>
 		<option value="A4263">A4263</option>
@@ -101,10 +102,36 @@
 		<option value="A4368">A4368</option>
 	</select>
 	<br>
-	<label for="product_name">Nome do produto:</label>
-	<input type="text" name="product_name">
-	<label for="quantity">Quantidade:</label>
-	<input type="text" name="quantity">
-	<br>
-	<button class="button is-success">Gerar Impressão</a>
+	<div id='products'>
+		<label for="product_name">Nome do produto:</label>
+		<input type="text" name="product_name[]" required>
+		<label for="quantity">Quantidade:</label>
+		<input type="text" name="quantity[]" required>	
+		<label for="price">Preço:</label>
+		<input type="text" name="price[]" required>
+		<br>		
+	</div>
+	<button class="button is-success">Gerar Impressão</button>
 </form>
+
+<script type="text/javascript">
+document.querySelector('#add_product').addEventListener('click', function(){
+	addFields('Nome do produto: ', 'product_name', 'product_name[]');
+	addFields(' Quantidade: ', 'quantity', 'quantity[]');
+	addFields(' Preço: ', 'price', 'price[]');
+
+  	function addFields(textNode, forName, inputName){
+		products = document.querySelector('#products');
+		let x = document.createElement("label");
+  		let t = document.createTextNode(textNode);
+  		x.setAttribute("for", forName);
+  		x.appendChild(t);	
+  		products.appendChild(x);
+	  	x = document.createElement("input");
+  		x.setAttribute("type", "text");
+  		x.setAttribute("name", inputName);
+  		x.setAttribute("required", true);
+  		products.appendChild(x);
+  	}
+});
+</script>
