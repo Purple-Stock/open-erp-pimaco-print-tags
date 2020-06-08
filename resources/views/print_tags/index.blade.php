@@ -118,20 +118,20 @@
 document.querySelector('#add_product').addEventListener('click', function(){
 	addFields('Nome do produto: ', 'product_name', 'product_name[]');
 	addFields(' Quantidade: ', 'quantity', 'quantity[]');
-	addFields(' Preço: ', 'price', 'price[]');
+	addFields(' Preço: ', 'price', 'price[]', 'br');
 
-  	function addFields(textNode, forName, inputName){
+  	function addFields(textNode, forName, inputName, extra = null){
 		products = document.querySelector('#products');
-		let x = document.createElement("label");
-  		let t = document.createTextNode(textNode);
+		let x = document.createElement("label").setAttribute("for", forName);
   		x.setAttribute("for", forName);
-  		x.appendChild(t);	
+  		x.appendChild(document.createTextNode(textNode));	
   		products.appendChild(x);
 	  	x = document.createElement("input");
   		x.setAttribute("type", "text");
   		x.setAttribute("name", inputName);
   		x.setAttribute("required", true);
   		products.appendChild(x);
+  		if (extra) products.appendChild(document.createElement(extra));
   	}
 });
 </script>
