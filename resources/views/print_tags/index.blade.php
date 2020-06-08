@@ -122,7 +122,7 @@ document.querySelector('#add_product').addEventListener('click', function(){
 
   	function addFields(textNode, forName, inputName, extra = null){
 		products = document.querySelector('#products');
-		let x = document.createElement("label").setAttribute("for", forName);
+		let x = document.createElement("label");
   		x.setAttribute("for", forName);
   		x.appendChild(document.createTextNode(textNode));	
   		products.appendChild(x);
