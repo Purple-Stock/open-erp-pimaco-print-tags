@@ -14,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/','PrintTagController@index');
+Route::post('/generate-print-tags','PrintTagController@generatePrintTags');
