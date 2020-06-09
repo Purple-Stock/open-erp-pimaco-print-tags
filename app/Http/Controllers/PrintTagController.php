@@ -21,14 +21,14 @@ class PrintTagController extends Controller
     public function generatePrintTags(Request $request)
     {
     	$pimaco = new Pimaco($request["pimaco"]);
-    	for ($i = 0; $i <= count($request["product_name"]) - 1; $i++) { 
+    	for ($i = 0; $i <= count($request["product_name"]) - 1; $i++) {
     		for ($j = 0; $j <= $request["quantity"][$i] - 1; $j++) {
 				$tag = new Tag();
 				$tag->setPadding(3);
 				$tag->img("https://17741.static.simplo7.net/static/17741/configuracao/logo_151893456531094.png")->setHeight(20)->setAlign('right');
-				$tag->qrcode($request["product_name"][$i])->setMargin(array(0,2,2,0))->br();
-				$tag->p($request["product_name"][$i])->setSize(5)->br();
-				$tag->p('R$:'.$request["price"][$i])->b()->setSize(5);
+				$tag->qrcode($request["product_name"][$i])->setSize(75)->br();
+				$tag->p($request["product_name"][$i])->setSize(5);
+				$tag->p(' R$:'.$request["price"][$i])->b()->setSize(5);
 				$pimaco->addTag($tag);
 			}
     	}
