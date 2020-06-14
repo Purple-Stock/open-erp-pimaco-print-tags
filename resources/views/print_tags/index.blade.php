@@ -1,3 +1,4 @@
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <title>Gerador de etiquetas Pimaco</title>
 <button id='add_product' class="button is-success">Adicionar Novo Produto</button><br><br>
 <form method="post" action="/generate-print-tags">
@@ -103,6 +104,10 @@
 	</select>
 	<br>
 	<div id='products'>
+		<label for="product_id">ID:</label>
+		<input type="text" name="product_id[]" required>
+		<label for="custom_id">Código Produto:</label>
+		<input type="text" name="custom_id[]" required>
 		<label for="product_name">Nome do produto:</label>
 		<input type="text" name="product_name[]" required>
 		<label for="quantity">Quantidade:</label>
@@ -113,10 +118,13 @@
 	</div>
 	<button class="button is-success">Gerar Impressão</button>
 </form>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
 document.querySelector('#add_product').addEventListener('click', function(){
-	addFields('Nome do produto: ', 'product_name', 'product_name[]');
+	addFields('ID: ', 'product_id', 'product_id[]');
+	addFields(' Código Produto: ', 'custom_id', 'custom_id[]');
+	addFields(' Nome do produto: ', 'product_name', 'product_name[]');
 	addFields(' Quantidade: ', 'quantity', 'quantity[]');
 	addFields(' Preço: ', 'price', 'price[]', 'br');
 
@@ -134,4 +142,5 @@ document.querySelector('#add_product').addEventListener('click', function(){
   		if (extra) products.appendChild(document.createElement(extra));
   	}
 });
+
 </script>
