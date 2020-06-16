@@ -26,8 +26,8 @@ class PrintTagController extends Controller
 				$tag = new Tag();
 				$tag->setPadding(3);
 				$tag->img("https://17741.static.simplo7.net/static/17741/configuracao/logo_151893456531094.png")->setHeight(20)->setAlign('right');
-                $tag->qrcode('{"id":'.$request["product_id"][$i].',"custom_id":"'.$request["custom_id"][$i].'","name":"'.$request["product_name"][$i].'"}')->setSize(80)->br();
-                $tag->p($request["product_name"][$i])->setSize(2);
+                $tag->qrcode('{"id":'.$request["product_id"][$i].',"custom_id":"'.$request["custom_id"][$i].'","name":"'.$request["product_name"][$i].'","price":"'.$request["price"][$i].'"}')->setSize(80)->br();
+                $tag->p($request["custom_id"][$i].'-'.$request["product_name"][$i])->setSize(2);
 				$tag->p(' R$:'.$request["price"][$i])->b()->setSize(2);
 				$pimaco->addTag($tag);
 			}
