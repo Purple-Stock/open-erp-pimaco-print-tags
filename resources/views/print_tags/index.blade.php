@@ -104,17 +104,10 @@
 	</select>
 	<br>
 	<div id='products'>
-		<label for="product_id">ID:</label>
-		<input type="text" name="product_id[]" required>
-		<label for="custom_id">Código Produto:</label>
-		<input type="text" name="custom_id[]" required>
-		<label for="product_name">Nome do produto:</label>
-		<input type="text" name="product_name[]" required>
+		<!-- <select id="product-dropdown" name="product[]"></select>
 		<label for="quantity">Quantidade:</label>
 		<input type="text" name="quantity[]" required>	
-		<label for="price">Preço:</label>
-		<input type="text" name="price[]" required>
-		<br>		
+		<br>		 -->
 	</div>
 	<button class="button is-success">Gerar Impressão</button>
 </form>
@@ -122,25 +115,80 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
 document.querySelector('#add_product').addEventListener('click', function(){
-	addFields('ID: ', 'product_id', 'product_id[]');
-	addFields(' Código Produto: ', 'custom_id', 'custom_id[]');
-	addFields(' Nome do produto: ', 'product_name', 'product_name[]');
-	addFields(' Quantidade: ', 'quantity', 'quantity[]');
-	addFields(' Preço: ', 'price', 'price[]', 'br');
-
-  	function addFields(textNode, forName, inputName, extra = null){
-		products = document.querySelector('#products');
-		let x = document.createElement("label");
-  		x.setAttribute("for", forName);
-  		x.appendChild(document.createTextNode(textNode));	
-  		products.appendChild(x);
-	  	x = document.createElement("input");
-  		x.setAttribute("type", "text");
-  		x.setAttribute("name", inputName);
-  		x.setAttribute("required", true);
-  		products.appendChild(x);
-  		if (extra) products.appendChild(document.createElement(extra));
-  	}
+	loadProducts();
 });
 
+var cont = 0;
+
+function loadProducts(){
+	var products = document.querySelector('#products');
+	let x = document.createElement("label");
+	x.setAttribute("for", 'product');
+	x.appendChild(document.createTextNode(' Nome do produto: '));	
+	products.appendChild(x);
+	x = document.createElement("select");
+	x.setAttribute("name", 'product[]');
+	x.setAttribute("id", 'product-dropdown');
+	x.setAttribute("class", 'product-dropdown'+cont);
+	x.setAttribute("required", true);
+	products.appendChild(x);
+
+	let dropdown = document.querySelectorAll('#product-dropdown');
+	dropdown = dropdown[dropdown.length - 1];
+
+	dropdown.length = 0;
+
+	let defaultOption = document.createElement('option');
+	defaultOption.text = 'Escolha o produto';
+
+	dropdown.add(defaultOption);
+	dropdown.selectedIndex = 0;
+
+	$('.product-dropdown'+cont).select2();
+	cont++;
+
+	const url = 'https://app.purplestock.com.br/products_defer';
+
+	fetch(url)  
+	.then(  
+		function(response) {  
+		if (response.status !== 200) {  
+			console.warn('Looks like there was a problem. Status Code: ' +  response.status);  
+			return; 
+		}
+		// Examine the text in the response  
+		response.json().then(function(products) {  
+			let option;
+			for (let i = 0; i < products.data.length; i++) {
+				option = document.createElement('option');
+				option.text = products.data[i].attributes.custom_id + '-' + products.data[i].attributes.name + '-' + products.data[i].attributes.price;
+				option.value = products.data[i].id + '-' + products.data[i].attributes.custom_id + '-' + products.data[i].attributes.name + '-' + products.data[i].attributes.price;
+				dropdown.add(option);
+			}    
+		});  
+		}  
+	)  
+	.catch(function(err) {  
+		console.error('Fetch Error -', err);  
+	});
+
+	addFields(' Quantidade: ', 'quantity', 'quantity[]', 'br');
+
+	function addFields(textNode, forName, inputName, extra = null){	
+		let x = document.createElement("label");
+		x.setAttribute("for", forName);
+		x.appendChild(document.createTextNode(textNode));	
+		products.appendChild(x);
+		x = document.createElement("input");
+		x.setAttribute("type", "text");
+		x.setAttribute("name", inputName);
+		x.setAttribute("required", true);
+		products.appendChild(x);
+		if (extra) products.appendChild(document.createElement(extra));
+	}
+}
+
+	loadProducts();
+	
+	$('#pimaco').select2();
 </script>

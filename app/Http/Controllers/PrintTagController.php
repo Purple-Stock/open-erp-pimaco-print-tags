@@ -20,15 +20,16 @@ class PrintTagController extends Controller
 
     public function generatePrintTags(Request $request)
     {
-    	$pimaco = new Pimaco($request["pimaco"]);
-    	for ($i = 0; $i <= count($request["product_name"]) - 1; $i++) {
+        $pimaco = new Pimaco($request["pimaco"]);
+    	for ($i = 0; $i <= count($request["product"]) - 1; $i++) {
     		for ($j = 0; $j <= $request["quantity"][$i] - 1; $j++) {
+                $product_data = explode('-', $request["product"][$i]); 
 				$tag = new Tag();
 				$tag->setPadding(3);
 				$tag->img("https://17741.static.simplo7.net/static/17741/configuracao/logo_151893456531094.png")->setHeight(20)->setAlign('right');
-                $tag->qrcode('{"id":'.$request["product_id"][$i].',"custom_id":"'.$request["custom_id"][$i].'","name":"'.$request["product_name"][$i].'","price":"'.$request["price"][$i].'"}')->setSize(80)->br();
-                $tag->p($request["custom_id"][$i].'-'.$request["product_name"][$i])->setSize(2);
-				$tag->p(' R$:'.$request["price"][$i])->b()->setSize(2);
+                $tag->qrcode('{"id":'.$product_data[0].',"custom_id":"'.$product_data[1].'","name":"'.$product_data[2].'","price":"'.$product_data[3].'"}')->setSize(80)->br();
+                $tag->p($product_data[1].'-'.$product_data[2])->setSize(2);
+				$tag->p($product_data[3])->b()->setSize(2);
 				$pimaco->addTag($tag);
 			}
     	}
