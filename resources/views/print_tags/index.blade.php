@@ -144,10 +144,10 @@ function loadProducts(){
 	dropdown.add(defaultOption);
 	dropdown.selectedIndex = 0;
 
-	$('.product-dropdown'+cont).select2();
+	$('.product-dropdown' + cont).select2();
 	cont++;
 
-	const url = 'https://app.purplestock.com.br/products_defer';
+	const url = 'https://app.purplestock.com.br/products_tags_defer';
 
 	fetch(url)  
 	.then(  
