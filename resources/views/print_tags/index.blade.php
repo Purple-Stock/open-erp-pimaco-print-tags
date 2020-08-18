@@ -147,11 +147,11 @@ function loadProducts(){
 	$('.product-dropdown' + cont).select2();
 	cont++;
 
-	const url = 'https://app.purplestock.com.br/products_tags_defer';
+	const url = 'https://app.purplestock.com.br/api/v1/products';
 
 	fetch(url)  
 	.then(  
-		function(response) {  
+		function(response) {
 		if (response.status !== 200) {  
 			console.warn('Looks like there was a problem. Status Code: ' +  response.status);  
 			return; 
@@ -159,10 +159,11 @@ function loadProducts(){
 		// Examine the text in the response  
 		response.json().then(function(products) {  
 			let option;
-			for (let i = 0; i < products.data.length; i++) {
+			p = products;
+			for (let i = 0; i < products.length; i++) {
 				option = document.createElement('option');
-				option.text = products.data[i].attributes.custom_id + '-' + products.data[i].attributes.name + '-' + products.data[i].attributes.price;
-				option.value = products.data[i].id + '-' + products.data[i].attributes.custom_id + '-' + products.data[i].attributes.name + '-' + products.data[i].attributes.price;
+				option.text = products[i].custom_id + '-' + products[i].name + '-' + products[i].price;
+				option.value = products[i].id + '-' + products[i].custom_id + '-' + products[i].name + '-' + products[i].price;
 				dropdown.add(option);
 			}    
 		});  

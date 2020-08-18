@@ -27,14 +27,14 @@ class PrintTagController extends Controller
 				$tag = new Tag();
 				$tag->setPadding(3);
 				$tag->img("https://17741.static.simplo7.net/static/17741/configuracao/logo_151893456531094.png")->setHeight(20)->setAlign('right');
-                $tag->qrcode('{"id":'.$product_data[0].',"custom_id":"'.$product_data[1].'","name":"'.$product_data[2].'","price":"'.$product_data[3].'"}')->setSize(80)->br();
-                $tag->p($product_data[1].'-'.$product_data[2])->setSize(2);
+                $tag->qrcode('{"id":'.$product_data[0].',"custom_id":"'.$product_data[1].'","name":"'.ucwords($product_data[2]).'","price":"'.$product_data[3].'"}')->setSize(80)->br();
+                $tag->p($product_data[1].'-'.ucwords($product_data[2]))->setSize(2);
 				$tag->p('-'.$product_data[3])->b()->setSize(2);
 				$pimaco->addTag($tag);
 			}
     	}
 
-		return response()->download($pimaco->output());
+		return $pimaco->output('tags.pdf', 'D');
     }
 
 
@@ -54,6 +54,6 @@ class PrintTagController extends Controller
             }
         }
 
-        return response()->download($pimaco->output());
+        return $pimaco->output('tags.pdf', 'D');
     }
 }
