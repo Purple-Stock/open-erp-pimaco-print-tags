@@ -7,6 +7,12 @@
         "laravel"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/PronerInformatica/phppimaco.git"
+        }
+    ],
     "require": {
         "php": "^7.4",
         "fideloper/proxy": "^4.2",
@@ -14,7 +20,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
-        "proner/phppimaco": "^1.4"
+        "proner/phppimaco": "dev-master#ef3bdae"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
