@@ -103,12 +103,7 @@
 		<option value="A4368">A4368</option>
 	</select>
 	<br>
-	<div id='products'>
-		<!-- <select id="product-dropdown" name="product[]"></select>
-		<label for="quantity">Quantidade:</label>
-		<input type="text" name="quantity[]" required>	
-		<br>		 -->
-	</div>
+	<div id='products'></div>
 	<button class="button is-success">Gerar Impressão</button>
 </form>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
@@ -122,16 +117,24 @@ var cont = 0;
 
 function loadProducts(){
 	var products = document.querySelector('#products');
-	let x = document.createElement("label");
-	x.setAttribute("for", 'product');
-	x.appendChild(document.createTextNode(' Nome do produto: '));	
+	let x = document.createElement("div");
+	x.setAttribute("id", 'row');
 	products.appendChild(x);
+
+	var row = document.querySelectorAll('#row');
+	row = row[row.length - 1];
+
+	x = document.createElement("label");
+	x.setAttribute("for", 'product');
+	x.appendChild(document.createTextNode(' Nome do produto: '));
+	row.appendChild(x);
+
 	x = document.createElement("select");
 	x.setAttribute("name", 'product[]');
 	x.setAttribute("id", 'product-dropdown');
-	x.setAttribute("class", 'product-dropdown'+cont);
+	x.setAttribute("class", 'product-dropdown' + cont);
 	x.setAttribute("required", true);
-	products.appendChild(x);
+	row.appendChild(x);
 
 	let dropdown = document.querySelectorAll('#product-dropdown');
 	dropdown = dropdown[dropdown.length - 1];
@@ -159,7 +162,6 @@ function loadProducts(){
 		// Examine the text in the response  
 		response.json().then(function(products) {  
 			let option;
-			p = products;
 			for (let i = 0; i < products.length; i++) {
 				option = document.createElement('option');
 				option.text = products[i].custom_id + '-' + products[i].name + '-' + products[i].price;
@@ -179,17 +181,38 @@ function loadProducts(){
 		let x = document.createElement("label");
 		x.setAttribute("for", forName);
 		x.appendChild(document.createTextNode(textNode));	
-		products.appendChild(x);
+		row.appendChild(x);
 		x = document.createElement("input");
 		x.setAttribute("type", "text");
 		x.setAttribute("name", inputName);
 		x.setAttribute("required", true);
-		products.appendChild(x);
-		if (extra) products.appendChild(document.createElement(extra));
+		row.appendChild(x);
+		x = document.createElement("button");
+		x.setAttribute("type", 'button');
+		x.innerHTML = "DELETAR";
+		x.setAttribute("class", 'delete');
+		row.appendChild(x);
+
+		if (extra) row.appendChild(document.createElement(extra));
+	}
+	
+	for (i = 0; i < close.length; i++) {
+		close[i].onclick = function() {
+			var div = this.parentElement;
+			div.remove();
+		}
 	}
 }
 
-	loadProducts();
-	
 	$('#pimaco').select2();
+
+	var close = document.getElementsByClassName("delete");
+	var i;
+	for (i = 0; i < close.length; i++) {
+		close[i].onclick = function() {
+			var div = this.closest('#row');
+			div.remove();
+		}
+	}
+
 </script>
