@@ -46,7 +46,7 @@ class PrintTagController extends Controller
                 $product_data = explode('-', $request["products"][$i]['name_product']);
                 $tag = new Tag();
                 $tag->setPadding(3);
-                $tag->img("https://17741.static.simplo7.net/static/17741/configuracao/logo_151893456531094.png")->setHeight(20)->setAlign('right');
+                $tag->img("https://purple-stock.s3-sa-east-1.amazonaws.com/logo_151893456531094+(1).png")->setHeight(20)->setAlign('right');
                 $tag->qrcode('{"id":'.$product_data[0].',"custom_id":"'.$product_data[1].'","name":"'.$product_data[2].'","price":"'.$product_data[3].'"}')->setSize(80)->br();
                 $tag->p($product_data[1].'-'.$product_data[2])->setSize(2);
                 $tag->p('-'.$product_data[3])->b()->setSize(2);
