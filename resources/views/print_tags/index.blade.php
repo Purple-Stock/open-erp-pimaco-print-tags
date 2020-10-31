@@ -6,6 +6,7 @@
 	<label for="pimaco">Escolha o formato da folha:</label>
 	<select name="pimaco" id="pimaco">
 		<option value="A4260">A4260</option>
+		<option value="6183">6183</option>
 		<option value="A4360">A4360</option>
 	 	<option value="3080">3080</option>
 		<option value="3081">3081</option>
@@ -33,7 +34,6 @@
 		<option value="6180">6180</option>
 		<option value="6181">6181</option>
 		<option value="6182">6182</option>
-		<option value="6183">6183</option>
 		<option value="6184">6184</option>
 		<option value="6185">6185</option>
 		<option value="6187">6187</option>
