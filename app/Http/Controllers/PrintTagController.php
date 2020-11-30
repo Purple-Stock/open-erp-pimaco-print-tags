@@ -28,7 +28,7 @@ class PrintTagController extends Controller
                     $tag = new Tag();
                     $tag->setPadding(3);
                     // $tag->img("https://purple-stock.s3-sa-east-1.amazonaws.com/logo_151893456531094+(1).png")->setHeight(20)->setAlign('right');
-                    $tag->qrcode('{"id":'.$product_data[0].',"custom_id":"'.$product_data[1].'","name":"'.ucwords($product_data[2]).'","price":"'.$product_data[3].'"}')->setSize(300)->br();
+                    $tag->qrcode('{"id":'.$product_data[0].',"custom_id":"'.$product_data[1].'","name":"'.ucwords($product_data[2]).'"}')->setSize(300)->br();
                     $tag->p($product_data[1].'-'.ucwords($product_data[2]))->setSize(3);
                     $tag->p('-'.$product_data[3])->b()->setSize(3);
                     $pimaco->addTag($tag);
@@ -41,7 +41,7 @@ class PrintTagController extends Controller
                     $tag = new Tag();
                     $tag->setPadding(3);
                     $tag->img("https://purple-stock.s3-sa-east-1.amazonaws.com/logo_151893456531094+(1).png")->setHeight(20)->setAlign('right');
-                    $tag->qrcode('{"id":'.$product_data[0].',"custom_id":"'.$product_data[1].'","name":"'.ucwords($product_data[2]).'","price":"'.$product_data[3].'"}')->setSize(80)->br();
+                    $tag->qrcode('{"id":'.$product_data[0].',"custom_id":"'.$product_data[1].'","name":"'.ucwords($product_data[2]).'"}')->setSize(80)->br();
                     $tag->p($product_data[1].'-'.ucwords($product_data[2]))->setSize(2);
                     $tag->p('-'.$product_data[3])->b()->setSize(2);
                     $pimaco->addTag($tag);
@@ -61,7 +61,7 @@ class PrintTagController extends Controller
                 $tag = new Tag();
                 $tag->setPadding(3);
                 $tag->img("https://purple-stock.s3-sa-east-1.amazonaws.com/logo_151893456531094+(1).png")->setHeight(20)->setAlign('right');
-                $tag->qrcode('{"id":'.$product_data[0].',"custom_id":"'.$product_data[1].'","name":"'.$product_data[2].'","price":"'.$product_data[3].'"}')->setSize(80)->br();
+                $tag->qrcode('{"id":'.$product_data[0].',"custom_id":"'.$product_data[1].'","name":"'.$product_data[2].'"}')->setSize(80)->br();
                 $tag->p($product_data[1].'-'.$product_data[2])->setSize(2);
                 $tag->p('-'.$product_data[3])->b()->setSize(2);
                 $pimaco->addTag($tag);
